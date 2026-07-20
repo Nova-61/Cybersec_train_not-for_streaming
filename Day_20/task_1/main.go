@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"strings"
 )
 
 type FileManager struct {
@@ -31,7 +32,8 @@ func (fm FileManager) Action(action string, content ...string) error {
 		if len(content) == 0 {
 			return fmt.Errorf("для записи нужен контент")
 		}
-		return fm.Write(content[0])
+		fullContent := strings.Join(content, " ")
+		return fm.Write(fullContent)
 
 	case "read":
 		data, err := fm.Read()
@@ -45,7 +47,8 @@ func (fm FileManager) Action(action string, content ...string) error {
 		if len(content) == 0 {
 			return fmt.Errorf("для записи нужен контент")
 		}
-		err := fm.Write(content[0])
+		fullContent := strings.Join(content, " ")
+		err := fm.Write(fullContent)
 		if err != nil {
 			return err
 		}
@@ -64,26 +67,21 @@ func (fm FileManager) Action(action string, content ...string) error {
 func main() {
 	file := FileManager{Filename: "file.txt"}
 
-	// 1️⃣ Запись
+	// Записываем одну строку
 	err := file.Action("write", "Hello, World!")
 	if err != nil {
 		fmt.Println(err)
 	}
 
-	// 2️⃣ Чтение
+	// Записываем несколько строк
+	err = file.Action("write", "Hello", "World!", "Go")
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	// Читаем
 	err = file.Action("read")
 	if err != nil {
 		fmt.Println(err)
 	}
-
-	// 3️⃣ Запись + чтение
-	err = file.Action("write_read", "Новый текст!")
-	if err != nil {
-		fmt.Println(err)
-	}
-
-	// 4️⃣ Неизвестное действие
-	err = file.Action("delete")
-	if err != nil {
-		fmt.Println(err) // неизвестное действие
-	}
+}

@@ -27,11 +27,7 @@ func searchHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func mainHandler(w http.ResponseWriter, r *http.Request) {
-	quary := r.URL.Query()
-	limit := quary.Get("limit")
-
-	limitInt, _ := strconv.Atoi(limit)
-	fmt.Fprintf(w, "Ебать тебя конопатый, хули ты здесь забыл еблан %d", limitInt)
+	fmt.Fprintf(w, "Ебать тебя конопатый, хули ты здесь забыл еблан")
 }
 
 func main() {
