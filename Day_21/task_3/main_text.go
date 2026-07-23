@@ -1,59 +1,158 @@
 package main
 
-import "testing"
+import (
+	"bytes"
+	"encoding/json"
+	"net/http"
+	"net/http/httptest"
+	"testing"
+)
 
-type testCase struct {
-	name     string
-	a, b     int
-	expected int
-	err      bool
-}
-
-func TestAll(t *testing.T) {
-	tests := []testCase{
-		// Add
-		{"Add positive", 2, 3, 5, false},
-		{"Add zero", 0, 5, 5, false},
-		{"Add negative", -2, -3, -5, false},
-		{"Add mixed", -2, 3, 1, false},
-
-		// Multiply
-		{"Multiply positive", 2, 3, 6, false},
-		{"Multiply zero", 5, 0, 0, false},
-		{"Multiply negative", -2, 3, -6, false},
-		{"Multiply mixed", -2, -3, 6, false},
-
-		// Divide
-		{"Divide positive", 6, 3, 2, false},
-		{"Divide negative", -6, 3, -2, false},
-		{"Divide by one", 7, 1, 7, false},
-		{"Divide by zero", 10, 0, 0, true},
+func TestGetUsersHandler(t *testing.T) {
+	req, err := http.NewRequest("GET", "/users", nil)
+	if err != nil {
+		t.Fatal(err)
 	}
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			var result int
-			var err error
+	rr := httptest.NewRecorder()
+	handler := http.HandlerFunc(getUsersHandler)
+	handler.ServeHTTP(rr, req)
 
-			// Определяем, какую функцию вызывать
-			switch {
-			case tt.name[:3] == "Add":
-				result = Add(tt.a, tt.b)
-			case tt.name[:8] == "Multiply":
-				result = Multiply(tt.a, tt.b)
-			case tt.name[:6] == "Divide":
-				result, err = Divide(tt.a, tt.b)
-			}
+	if status := rr.Code; status != http.StatusOK {
+		t.Errorf("handler returned wrong status code: got %v want %v", status, http.StatusOK)
+	}
 
-			if tt.err && err == nil {
-				t.Errorf("%s expected error, got nil", tt.name)
-			}
-			if !tt.err && err != nil {
-				t.Errorf("%s error: %v", tt.name, err)
-			}
-			if result != tt.expected {
-				t.Errorf("%s = %d; want %d", tt.name, result, tt.expected)
-			}
-		})
+	var users []User
+	err = json.Unmarshal(rr.Body.Bytes(), &users)
+	if err != nil {
+		t.Errorf("failed to parse JSON: %v", err)
+	}
+
+	if len(users) != 2 {
+		t.Errorf("expected 2 users, got %d", len(users))
+	}
+}
+
+func TestGetUserHandler(t *testing.T) {
+	req, err := http.NewRequest("GET", "/users/1", nil)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	rr := httptest.NewRecorder()
+	handler := http.HandlerFunc(getUserHandler)
+	handler.ServeHTTP(rr, req)
+
+	if status := rr.Code; status != http.StatusOK {
+		t.Errorf("handler returned wrong status code: got %v want %v", status, http.StatusOK)
+	}
+
+	var user User
+	err = json.Unmarshal(rr.Body.Bytes(), &user)
+	if err != nil {
+		t.Errorf("failed to parse JSON: %v", err)
+	}
+
+	if user.ID != 1 {
+		t.Errorf("expected user ID 1, got %d", user.ID)
+	}
+}
+
+func TestGetUserHandlerNotFound(t *testing.T) {
+	req, err := http.NewRequest("GET", "/users/999", nil)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	rr := httptest.NewRecorder()
+	handler := http.HandlerFunc(getUserHandler)
+	handler.ServeHTTP(rr, req)
+
+	if status := rr.Code; status != http.StatusNotFound {
+		t.Errorf("handler returned wrong status code: got %v want %v", status, http.StatusNotFound)
+	}
+}
+
+func TestCreateUserHandler(t *testing.T) {
+	newUser := User{
+		Name:  "Anna",
+		Email: "anna@mail.com",
+		Age:   28,
+	}
+	body, _ := json.Marshal(newUser)
+
+	req, err := http.NewRequest("POST", "/users", bytes.NewBuffer(body))
+	if err != nil {
+		t.Fatal(err)
+	}
+	req.Header.Set("Content-Type", "application/json")
+
+	rr := httptest.NewRecorder()
+	handler := http.HandlerFunc(createUserHandler)
+	handler.ServeHTTP(rr, req)
+
+	if status := rr.Code; status != http.StatusCreated {
+		t.Errorf("handler returned wrong status code: got %v want %v", status, http.StatusCreated)
+	}
+
+	var created User
+	err = json.Unmarshal(rr.Body.Bytes(), &created)
+	if err != nil {
+		t.Errorf("failed to parse JSON: %v", err)
+	}
+
+	if created.Name != "Anna" {
+		t.Errorf("expected name Anna, got %s", created.Name)
+	}
+	if created.ID != 3 {
+		t.Errorf("expected ID 3, got %d", created.ID)
+	}
+}
+
+func TestCreateUserHandlerInvalidJSON(t *testing.T) {
+	body := []byte(`{"name": "Anna"}`) // missing email
+
+	req, err := http.NewRequest("POST", "/users", bytes.NewBuffer(body))
+	if err != nil {
+		t.Fatal(err)
+	}
+	req.Header.Set("Content-Type", "application/json")
+
+	rr := httptest.NewRecorder()
+	handler := http.HandlerFunc(createUserHandler)
+	handler.ServeHTTP(rr, req)
+
+	if status := rr.Code; status != http.StatusBadRequest {
+		t.Errorf("handler returned wrong status code: got %v want %v", status, http.StatusBadRequest)
+	}
+}
+
+func TestDeleteUserHandler(t *testing.T) {
+	req, err := http.NewRequest("DELETE", "/users/1", nil)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	rr := httptest.NewRecorder()
+	handler := http.HandlerFunc(deleteUserHandler)
+	handler.ServeHTTP(rr, req)
+
+	if status := rr.Code; status != http.StatusNoContent {
+		t.Errorf("handler returned wrong status code: got %v want %v", status, http.StatusNoContent)
+	}
+}
+
+func TestDeleteUserHandlerNotFound(t *testing.T) {
+	req, err := http.NewRequest("DELETE", "/users/999", nil)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	rr := httptest.NewRecorder()
+	handler := http.HandlerFunc(deleteUserHandler)
+	handler.ServeHTTP(rr, req)
+
+	if status := rr.Code; status != http.StatusNotFound {
+		t.Errorf("handler returned wrong status code: got %v want %v", status, http.StatusNotFound)
 	}
 }
