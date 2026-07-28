@@ -16,10 +16,10 @@ func connectDB() (*sql.DB, error) {
 	if err != nil {
 		return nil, err
 	}
-	// НАстройка пула соеденений
-	db.SetMaxOpenConns(25)                 // максимум открытых соединений
-	db.SetMaxIdleConns(25)                 // максимум idle соединений
-	db.SetConnMaxLifetime(5 * time.Minute) // время жизни соединения
+
+	db.SetMaxOpenConns(25)
+	db.SetMaxIdleConns(25)
+	db.SetConnMaxLifetime(5 * time.Minute)
 
 	err = db.Ping()
 	if err != nil {
