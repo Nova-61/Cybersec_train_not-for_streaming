@@ -1,0 +1,1736 @@
+{
+	"Golang errors": {
+		"Day_27/task_2": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "importing dir \"Day_27/task_2\": Day_27/task_2/main.go:1:1: expected 'package', found 'EOF'"
+			}
+		],
+		"Day_28/task_2": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "importing dir \"Day_28/task_2\": Day_28/task_2/main.go:1:1: expected 'package', found 'EOF'"
+			}
+		]
+	},
+	"Issues": [
+		{
+			"severity": "HIGH",
+			"confidence": "MEDIUM",
+			"cwe": {
+				"id": "338",
+				"url": "https://cwe.mitre.org/data/definitions/338.html"
+			},
+			"rule_id": "G404",
+			"details": "Use of weak random number generator (math/rand or math/rand/v2 instead of crypto/rand)",
+			"file": "/home/ivan/Documents/go_projects/Day_3/task_4/main.go",
+			"code": "11: \t\n12: \tsecretNumber := rand.Intn(100) + 1\n13: \tvar guess int\n",
+			"line": "12",
+			"column": "18",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "HIGH",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "22",
+				"url": "https://cwe.mitre.org/data/definitions/22.html"
+			},
+			"rule_id": "G703",
+			"details": "Path traversal via taint analysis",
+			"file": "/home/ivan/Documents/go_projects/Day_20/task_3/main.go",
+			"code": "153: \tfilePath := filepath.Join(\"uploads\", filename)\n154: \terr := os.Remove(filePath)\n155: \tif err != nil {\n",
+			"line": "154",
+			"column": "18",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "HIGH",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "22",
+				"url": "https://cwe.mitre.org/data/definitions/22.html"
+			},
+			"rule_id": "G703",
+			"details": "Path traversal via taint analysis",
+			"file": "/home/ivan/Documents/go_projects/Day_20/task_3/main.go",
+			"code": "120: \n121: \tfile, err := os.Open(filename)\n122: \tif err != nil {\n",
+			"line": "121",
+			"column": "22",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "HIGH",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "22",
+				"url": "https://cwe.mitre.org/data/definitions/22.html"
+			},
+			"rule_id": "G703",
+			"details": "Path traversal via taint analysis",
+			"file": "/home/ivan/Documents/go_projects/Day_20/task_3/main.go",
+			"code": "89: \t\tfilePath := filepath.Join(\"uploads\", filename)\n90: \t\tdst, err := os.Create(filePath)\n91: \t\tif err != nil {\n",
+			"line": "90",
+			"column": "24",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "HIGH",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "22",
+				"url": "https://cwe.mitre.org/data/definitions/22.html"
+			},
+			"rule_id": "G703",
+			"details": "Path traversal via taint analysis",
+			"file": "/home/ivan/Documents/go_projects/Day_20/task_2/main.go",
+			"code": "46: \t\tfilePath := filepath.Join(\"uploads\", handler.Filename)\n47: \t\tdst, err := os.Create(filePath)\n48: \t\tif err != nil {\n",
+			"line": "47",
+			"column": "24",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "MEDIUM",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "79",
+				"url": "https://cwe.mitre.org/data/definitions/79.html"
+			},
+			"rule_id": "G705",
+			"details": "XSS via taint analysis",
+			"file": "/home/ivan/Documents/go_projects/Day_28/task_3/main.go",
+			"code": "10: \tif r.TLS != nil {\n11: \t\tfmt.Fprintf(w, \"TLS версия: %v\\n\", r.TLS.Version)\n12: \t\tif r.TLS.Version == tls.VersionTLS13 {\n",
+			"line": "11",
+			"column": "14",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "MEDIUM",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "79",
+				"url": "https://cwe.mitre.org/data/definitions/79.html"
+			},
+			"rule_id": "G705",
+			"details": "XSS via taint analysis",
+			"file": "/home/ivan/Documents/go_projects/Day_28/task_1/main.go",
+			"code": "17: \t}\n18: \tfmt.Fprintf(w, \"Привет %s!\", name)\n19: }\n",
+			"line": "18",
+			"column": "13",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "MEDIUM",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "79",
+				"url": "https://cwe.mitre.org/data/definitions/79.html"
+			},
+			"rule_id": "G705",
+			"details": "XSS via taint analysis",
+			"file": "/home/ivan/Documents/go_projects/Day_27/task_3/main.go",
+			"code": "10: \tif r.TLS != nil {\n11: \t\tfmt.Fprintf(w, \"TLS версия: %v\\n\", r.TLS.Version)\n12: \t\tif r.TLS.Version == tls.VersionTLS13 {\n",
+			"line": "11",
+			"column": "14",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "MEDIUM",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "79",
+				"url": "https://cwe.mitre.org/data/definitions/79.html"
+			},
+			"rule_id": "G705",
+			"details": "XSS via taint analysis",
+			"file": "/home/ivan/Documents/go_projects/Day_27/task_1/main.go",
+			"code": "17: \t}\n18: \tfmt.Fprintf(w, \"Привет %s!\", name)\n19: }\n",
+			"line": "18",
+			"column": "13",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "MEDIUM",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "79",
+				"url": "https://cwe.mitre.org/data/definitions/79.html"
+			},
+			"rule_id": "G705",
+			"details": "XSS via taint analysis",
+			"file": "/home/ivan/Documents/go_projects/Day_26/task_1/main.go",
+			"code": "17: \t}\n18: \tfmt.Fprintf(w, \"Привет %s!\", name)\n19: }\n",
+			"line": "18",
+			"column": "13",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "MEDIUM",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "79",
+				"url": "https://cwe.mitre.org/data/definitions/79.html"
+			},
+			"rule_id": "G705",
+			"details": "XSS via taint analysis",
+			"file": "/home/ivan/Documents/go_projects/Day_20/task_3/main.go",
+			"code": "160: \tw.Header().Set(\"Content-Type\", \"text/html; charset=utf-8\")\n161: \tfmt.Fprintf(w, \"Файл %s удалён!\u003cbr\u003e\u003ca href=\\\"/\\\"\u003eНазад\u003c/a\u003e\", filename)\n162: }\n",
+			"line": "161",
+			"column": "13",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "MEDIUM",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "79",
+				"url": "https://cwe.mitre.org/data/definitions/79.html"
+			},
+			"rule_id": "G705",
+			"details": "XSS via taint analysis",
+			"file": "/home/ivan/Documents/go_projects/Day_20/task_3/main.go",
+			"code": "102: \n103: \t\tfmt.Fprintf(w, \"Файл %s загружен!\u003cbr\u003e\u003ca href=\\\"/\\\"\u003eНазад\u003c/a\u003e\", filename)\n104: \t}\n",
+			"line": "103",
+			"column": "14",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "MEDIUM",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "79",
+				"url": "https://cwe.mitre.org/data/definitions/79.html"
+			},
+			"rule_id": "G705",
+			"details": "XSS via taint analysis",
+			"file": "/home/ivan/Documents/go_projects/Day_20/task_2/main.go",
+			"code": "60: \n61: \t\tfmt.Fprintf(w, \"Файл %s загружен!\", handler.Filename)\n62: \n",
+			"line": "61",
+			"column": "14",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "MEDIUM",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "79",
+				"url": "https://cwe.mitre.org/data/definitions/79.html"
+			},
+			"rule_id": "G705",
+			"details": "XSS via taint analysis",
+			"file": "/home/ivan/Documents/go_projects/Day_19/task_3/main.go",
+			"code": "50: \t\t\tw.Header().Set(\"Content-Type\", \"text/html; charset=utf-8\")\n51: \t\t\tfmt.Fprintf(w, `\u003cform method=\"POST\"\u003e\n52: \t\t\t\t\u003cinput name=\"username\" placeholder=\"Логин\" value=\"%s\"\u003e\n",
+			"line": "51",
+			"column": "15",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "MEDIUM",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "79",
+				"url": "https://cwe.mitre.org/data/definitions/79.html"
+			},
+			"rule_id": "G705",
+			"details": "XSS via taint analysis",
+			"file": "/home/ivan/Documents/go_projects/Day_19/task_1/main.go",
+			"code": "25: \n26: \tfmt.Fprintf(w, \"Посик по запросу: %s, лимит %d\", q, limitInt)\n27: }\n",
+			"line": "26",
+			"column": "13",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "MEDIUM",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "79",
+				"url": "https://cwe.mitre.org/data/definitions/79.html"
+			},
+			"rule_id": "G705",
+			"details": "XSS via taint analysis",
+			"file": "/home/ivan/Documents/go_projects/Day_15/task_4/main.go",
+			"code": "45: \n46: \tfmt.Fprintf(w, \"Пользователь с ID: %s\", id)\n47: }\n",
+			"line": "46",
+			"column": "13",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "MEDIUM",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "79",
+				"url": "https://cwe.mitre.org/data/definitions/79.html"
+			},
+			"rule_id": "G705",
+			"details": "XSS via taint analysis",
+			"file": "/home/ivan/Documents/go_projects/Day_15/task_4/main.go",
+			"code": "13: \t}\n14: \tfmt.Fprintf(w, \"Привет, %s!\", name)\n15: }\n",
+			"line": "14",
+			"column": "13",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "MEDIUM",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "79",
+				"url": "https://cwe.mitre.org/data/definitions/79.html"
+			},
+			"rule_id": "G705",
+			"details": "XSS via taint analysis",
+			"file": "/home/ivan/Documents/go_projects/Day_15/main.go",
+			"code": "17: \t}\n18: \tfmt.Fprintf(w, \"Привет %s!\", name)\n19: }\n",
+			"line": "18",
+			"column": "13",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "MEDIUM",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "676",
+				"url": "https://cwe.mitre.org/data/definitions/676.html"
+			},
+			"rule_id": "G114",
+			"details": "Use of net/http serve function that has no support for setting timeouts",
+			"file": "/home/ivan/Documents/go_projects/Day_28/task_1/main.go",
+			"code": "76: \n77: \terr := http.ListenAndServeTLS(\":8443\", \"certs/server.crt\", \"certs/server.key\", nil)\n78: \tif err != nil {\n",
+			"line": "77",
+			"column": "9",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "MEDIUM",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "676",
+				"url": "https://cwe.mitre.org/data/definitions/676.html"
+			},
+			"rule_id": "G114",
+			"details": "Use of net/http serve function that has no support for setting timeouts",
+			"file": "/home/ivan/Documents/go_projects/Day_27/task_1/main.go",
+			"code": "76: \n77: \terr := http.ListenAndServeTLS(\":8443\", \"certs/server.crt\", \"certs/server.key\", nil)\n78: \tif err != nil {\n",
+			"line": "77",
+			"column": "9",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "MEDIUM",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "676",
+				"url": "https://cwe.mitre.org/data/definitions/676.html"
+			},
+			"rule_id": "G114",
+			"details": "Use of net/http serve function that has no support for setting timeouts",
+			"file": "/home/ivan/Documents/go_projects/Day_26/task_3/main.go",
+			"code": "32: \t\tfmt.Println(\"HTTP сервер на порту 8080 → редирект на HTTPS\")\n33: \t\tif err := http.ListenAndServe(\":8080\", http.HandlerFunc(redirectToHTTPS)); err != nil {\n34: \t\t\tfmt.Println(\"Ошибка HTTP:\", err)\n",
+			"line": "33",
+			"column": "13",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "MEDIUM",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "676",
+				"url": "https://cwe.mitre.org/data/definitions/676.html"
+			},
+			"rule_id": "G114",
+			"details": "Use of net/http serve function that has no support for setting timeouts",
+			"file": "/home/ivan/Documents/go_projects/Day_26/task_1/main.go",
+			"code": "76: \n77: \terr := http.ListenAndServeTLS(\":8443\", \"certs/server.crt\", \"certs/server.key\", nil)\n78: \tif err != nil {\n",
+			"line": "77",
+			"column": "9",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "MEDIUM",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "676",
+				"url": "https://cwe.mitre.org/data/definitions/676.html"
+			},
+			"rule_id": "G114",
+			"details": "Use of net/http serve function that has no support for setting timeouts",
+			"file": "/home/ivan/Documents/go_projects/Day_21/task_3/main.go",
+			"code": "123: \n124: \thttp.ListenAndServe(\":8080\", nil)\n125: }\n",
+			"line": "124",
+			"column": "2",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "MEDIUM",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "676",
+				"url": "https://cwe.mitre.org/data/definitions/676.html"
+			},
+			"rule_id": "G114",
+			"details": "Use of net/http serve function that has no support for setting timeouts",
+			"file": "/home/ivan/Documents/go_projects/Day_20/task_3/main.go",
+			"code": "177: \n178: \thttp.ListenAndServe(\":8080\", nil)\n179: }\n",
+			"line": "178",
+			"column": "2",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "MEDIUM",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "676",
+				"url": "https://cwe.mitre.org/data/definitions/676.html"
+			},
+			"rule_id": "G114",
+			"details": "Use of net/http serve function that has no support for setting timeouts",
+			"file": "/home/ivan/Documents/go_projects/Day_20/task_2/main.go",
+			"code": "73: \n74: \thttp.ListenAndServe(\":8080\", nil)\n75: }\n",
+			"line": "74",
+			"column": "2",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "MEDIUM",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "676",
+				"url": "https://cwe.mitre.org/data/definitions/676.html"
+			},
+			"rule_id": "G114",
+			"details": "Use of net/http serve function that has no support for setting timeouts",
+			"file": "/home/ivan/Documents/go_projects/Day_18/task_2/main.go",
+			"code": "133: \n134: \thttp.ListenAndServe(\":8080\", nil)\n135: }\n",
+			"line": "134",
+			"column": "2",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "MEDIUM",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "676",
+				"url": "https://cwe.mitre.org/data/definitions/676.html"
+			},
+			"rule_id": "G114",
+			"details": "Use of net/http serve function that has no support for setting timeouts",
+			"file": "/home/ivan/Documents/go_projects/Day_18/task_1/main.go",
+			"code": "144: \n145: \thttp.ListenAndServe(\":8080\", nil)\n146: }\n",
+			"line": "145",
+			"column": "2",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "MEDIUM",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "676",
+				"url": "https://cwe.mitre.org/data/definitions/676.html"
+			},
+			"rule_id": "G114",
+			"details": "Use of net/http serve function that has no support for setting timeouts",
+			"file": "/home/ivan/Documents/go_projects/Day_17/task_3/main.go",
+			"code": "154: \n155: \thttp.ListenAndServe(\":8080\", nil)\n156: }\n",
+			"line": "155",
+			"column": "2",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "MEDIUM",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "676",
+				"url": "https://cwe.mitre.org/data/definitions/676.html"
+			},
+			"rule_id": "G114",
+			"details": "Use of net/http serve function that has no support for setting timeouts",
+			"file": "/home/ivan/Documents/go_projects/Day_16/task_3/main.go",
+			"code": "31: \tfmt.Println(\"  /panic - вызывает панику и перехватывает её\")\n32: \thttp.ListenAndServe(\":8080\", nil)\n33: }\n",
+			"line": "32",
+			"column": "2",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "MEDIUM",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "676",
+				"url": "https://cwe.mitre.org/data/definitions/676.html"
+			},
+			"rule_id": "G114",
+			"details": "Use of net/http serve function that has no support for setting timeouts",
+			"file": "/home/ivan/Documents/go_projects/Day_16/task_2/main.go",
+			"code": "38: \tfmt.Println(\"  /admin - требует X-API-Key: 123\")\n39: \thttp.ListenAndServe(\":8080\", nil)\n40: }\n",
+			"line": "39",
+			"column": "2",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "MEDIUM",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "676",
+				"url": "https://cwe.mitre.org/data/definitions/676.html"
+			},
+			"rule_id": "G114",
+			"details": "Use of net/http serve function that has no support for setting timeouts",
+			"file": "/home/ivan/Documents/go_projects/Day_16/task_1/main.go",
+			"code": "39: \tfmt.Println(\"Server on http://localhost:8080\")\n40: \thttp.ListenAndServe(\":8080\", nil)\n41: }\n",
+			"line": "40",
+			"column": "2",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "MEDIUM",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "676",
+				"url": "https://cwe.mitre.org/data/definitions/676.html"
+			},
+			"rule_id": "G114",
+			"details": "Use of net/http serve function that has no support for setting timeouts",
+			"file": "/home/ivan/Documents/go_projects/Day_15/task_4/main.go",
+			"code": "69: \n70: \thttp.ListenAndServe(\":8080\", handler)\n71: }\n",
+			"line": "70",
+			"column": "2",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "MEDIUM",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "676",
+				"url": "https://cwe.mitre.org/data/definitions/676.html"
+			},
+			"rule_id": "G114",
+			"details": "Use of net/http serve function that has no support for setting timeouts",
+			"file": "/home/ivan/Documents/go_projects/Day_15/task_3/main.go",
+			"code": "71: \tfmt.Println(\"Server on http://localhost:8080\")\n72: \thttp.ListenAndServe(\":8080\", handler)\n73: }\n",
+			"line": "72",
+			"column": "2",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "MEDIUM",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "676",
+				"url": "https://cwe.mitre.org/data/definitions/676.html"
+			},
+			"rule_id": "G114",
+			"details": "Use of net/http serve function that has no support for setting timeouts",
+			"file": "/home/ivan/Documents/go_projects/Day_15/task_2/main.go",
+			"code": "40: \n41: \thttp.ListenAndServe(\":8080\", nil)\n42: }\n",
+			"line": "41",
+			"column": "2",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "MEDIUM",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "676",
+				"url": "https://cwe.mitre.org/data/definitions/676.html"
+			},
+			"rule_id": "G114",
+			"details": "Use of net/http serve function that has no support for setting timeouts",
+			"file": "/home/ivan/Documents/go_projects/Day_15/task_1/main.go",
+			"code": "30: \n31: \thttp.ListenAndServe(\":8080\", nil)\n32: }\n",
+			"line": "31",
+			"column": "2",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "MEDIUM",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "676",
+				"url": "https://cwe.mitre.org/data/definitions/676.html"
+			},
+			"rule_id": "G114",
+			"details": "Use of net/http serve function that has no support for setting timeouts",
+			"file": "/home/ivan/Documents/go_projects/Day_15/main.go",
+			"code": "75: \tfmt.Println(\"  /calc?a=10\u0026b=5\u0026op=+  - 15\")\n76: \thttp.ListenAndServe(\":8080\", nil)\n77: }\n",
+			"line": "76",
+			"column": "2",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "MEDIUM",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "676",
+				"url": "https://cwe.mitre.org/data/definitions/676.html"
+			},
+			"rule_id": "G114",
+			"details": "Use of net/http serve function that has no support for setting timeouts",
+			"file": "/home/ivan/Documents/go_projects/Day_13/task_4/main.go",
+			"code": "57: \tfmt.Println(\"Проверка: http://localhost:8080/process?data=hello\")\n58: \thttp.ListenAndServe(\":8080\", nil)\n59: }\n",
+			"line": "58",
+			"column": "2",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "MEDIUM",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "400",
+				"url": "https://cwe.mitre.org/data/definitions/400.html"
+			},
+			"rule_id": "G120",
+			"details": "Unbounded form parsing in HTTP handlers can cause memory exhaustion",
+			"file": "/home/ivan/Documents/go_projects/Day_20/task_3/main.go",
+			"code": "48: \tcase \"POST\":\n49: \t\terr := r.ParseMultipartForm(10 \u003c\u003c 20) // 10 MB\n50: \t\tif err != nil {\n",
+			"line": "49",
+			"column": "30",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "MEDIUM",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "22",
+				"url": "https://cwe.mitre.org/data/definitions/22.html"
+			},
+			"rule_id": "G304",
+			"details": "Potential file inclusion via variable",
+			"file": "/home/ivan/Documents/go_projects/Day_20/task_3/main.go",
+			"code": "120: \n121: \tfile, err := os.Open(filename)\n122: \tif err != nil {\n",
+			"line": "121",
+			"column": "15",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "MEDIUM",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "22",
+				"url": "https://cwe.mitre.org/data/definitions/22.html"
+			},
+			"rule_id": "G304",
+			"details": "Potential file inclusion via variable",
+			"file": "/home/ivan/Documents/go_projects/Day_20/task_3/main.go",
+			"code": "89: \t\tfilePath := filepath.Join(\"uploads\", filename)\n90: \t\tdst, err := os.Create(filePath)\n91: \t\tif err != nil {\n",
+			"line": "90",
+			"column": "15",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "MEDIUM",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "22",
+				"url": "https://cwe.mitre.org/data/definitions/22.html"
+			},
+			"rule_id": "G304",
+			"details": "Potential file inclusion via variable",
+			"file": "/home/ivan/Documents/go_projects/Day_20/task_2/main.go",
+			"code": "46: \t\tfilePath := filepath.Join(\"uploads\", handler.Filename)\n47: \t\tdst, err := os.Create(filePath)\n48: \t\tif err != nil {\n",
+			"line": "47",
+			"column": "15",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "MEDIUM",
+			"confidence": "LOW",
+			"cwe": {
+				"id": "400",
+				"url": "https://cwe.mitre.org/data/definitions/400.html"
+			},
+			"rule_id": "G112",
+			"details": "Potential Slowloris Attack because ReadHeaderTimeout is not configured in the http.Server",
+			"file": "/home/ivan/Documents/go_projects/Day_28/task_3/main.go",
+			"code": "32: \n33: \thttpsServer := \u0026http.Server{\n34: \t\tAddr:      \":8443\",\n35: \t\tTLSConfig: tlsConfig,\n36: \t}\n37: \n",
+			"line": "33-36",
+			"column": "18",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "MEDIUM",
+			"confidence": "LOW",
+			"cwe": {
+				"id": "400",
+				"url": "https://cwe.mitre.org/data/definitions/400.html"
+			},
+			"rule_id": "G112",
+			"details": "Potential Slowloris Attack because ReadHeaderTimeout is not configured in the http.Server",
+			"file": "/home/ivan/Documents/go_projects/Day_27/task_3/main.go",
+			"code": "32: \n33: \thttpsServer := \u0026http.Server{\n34: \t\tAddr:      \":8443\",\n35: \t\tTLSConfig: tlsConfig,\n36: \t}\n37: \n",
+			"line": "33-36",
+			"column": "18",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "MEDIUM",
+			"confidence": "LOW",
+			"cwe": {
+				"id": "400",
+				"url": "https://cwe.mitre.org/data/definitions/400.html"
+			},
+			"rule_id": "G112",
+			"details": "Potential Slowloris Attack because ReadHeaderTimeout is not configured in the http.Server",
+			"file": "/home/ivan/Documents/go_projects/Day_26/task_3/main.go",
+			"code": "38: \t// HTTPS сервер\n39: \thttpsServer := \u0026http.Server{\n40: \t\tAddr:      \":8443\",\n41: \t\tTLSConfig: tlsConfig,\n42: \t}\n43: \n",
+			"line": "39-42",
+			"column": "18",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "MEDIUM",
+			"confidence": "LOW",
+			"cwe": {
+				"id": "400",
+				"url": "https://cwe.mitre.org/data/definitions/400.html"
+			},
+			"rule_id": "G112",
+			"details": "Potential Slowloris Attack because ReadHeaderTimeout is not configured in the http.Server",
+			"file": "/home/ivan/Documents/go_projects/Day_19/task_3/main.go",
+			"code": "73: \n74: \tsrv := \u0026http.Server{\n75: \t\tAddr:    \":8080\",\n76: \t\tHandler: nil,\n77: \t}\n78: \n",
+			"line": "74-77",
+			"column": "10",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "MEDIUM",
+			"confidence": "LOW",
+			"cwe": {
+				"id": "400",
+				"url": "https://cwe.mitre.org/data/definitions/400.html"
+			},
+			"rule_id": "G112",
+			"details": "Potential Slowloris Attack because ReadHeaderTimeout is not configured in the http.Server",
+			"file": "/home/ivan/Documents/go_projects/Day_19/task_2/main.go",
+			"code": "47: \n48: \tsrv := \u0026http.Server{\n49: \t\tAddr:    \":8080\",\n50: \t\tHandler: nil,\n51: \t}\n52: \n",
+			"line": "48-51",
+			"column": "10",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "MEDIUM",
+			"confidence": "LOW",
+			"cwe": {
+				"id": "400",
+				"url": "https://cwe.mitre.org/data/definitions/400.html"
+			},
+			"rule_id": "G112",
+			"details": "Potential Slowloris Attack because ReadHeaderTimeout is not configured in the http.Server",
+			"file": "/home/ivan/Documents/go_projects/Day_19/task_1/main.go",
+			"code": "37: \n38: \tsrv := \u0026http.Server{\n39: \t\tAddr:    \":8080\",\n40: \t\tHandler: nil,\n41: \t}\n42: \n",
+			"line": "38-41",
+			"column": "10",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "MEDIUM",
+			"confidence": "LOW",
+			"cwe": {
+				"id": "400",
+				"url": "https://cwe.mitre.org/data/definitions/400.html"
+			},
+			"rule_id": "G112",
+			"details": "Potential Slowloris Attack because ReadHeaderTimeout is not configured in the http.Server",
+			"file": "/home/ivan/Documents/go_projects/Day_18/task_3/main.go",
+			"code": "146: \n147: \tsrv := \u0026http.Server{\n148: \t\tAddr:    \":8080\",\n149: \t\tHandler: nil,\n150: \t}\n151: \n",
+			"line": "147-150",
+			"column": "10",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "MEDIUM",
+			"confidence": "HIGH",
+			"cwe": null,
+			"rule_id": "G710",
+			"details": "Open redirect via taint analysis",
+			"file": "/home/ivan/Documents/go_projects/Day_26/task_3/main.go",
+			"code": "13: func redirectToHTTPS(w http.ResponseWriter, r *http.Request) {\n14: \thttp.Redirect(w, r, \"https://localhost:8443\"+r.URL.Path, http.StatusMovedPermanently)\n15: }\n",
+			"line": "14",
+			"column": "15",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "MEDIUM",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "276",
+				"url": "https://cwe.mitre.org/data/definitions/276.html"
+			},
+			"rule_id": "G301",
+			"details": "Expect directory permissions to be 0750 or less",
+			"file": "/home/ivan/Documents/go_projects/Day_20/task_3/main.go",
+			"code": "164: func main() {\n165: \tos.MkdirAll(\"uploads\", 0755)\n166: \n",
+			"line": "165",
+			"column": "2",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "MEDIUM",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "276",
+				"url": "https://cwe.mitre.org/data/definitions/276.html"
+			},
+			"rule_id": "G301",
+			"details": "Expect directory permissions to be 0750 or less",
+			"file": "/home/ivan/Documents/go_projects/Day_20/task_3/main.go",
+			"code": "82: \n83: \t\terr = os.MkdirAll(\"uploads\", 0755)\n84: \t\tif err != nil {\n",
+			"line": "83",
+			"column": "9",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "MEDIUM",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "276",
+				"url": "https://cwe.mitre.org/data/definitions/276.html"
+			},
+			"rule_id": "G301",
+			"details": "Expect directory permissions to be 0750 or less",
+			"file": "/home/ivan/Documents/go_projects/Day_20/task_2/main.go",
+			"code": "38: \t\t// Создаём папку uploads, если её нет\n39: \t\terr = os.MkdirAll(\"uploads\", 0755)\n40: \t\tif err != nil {\n",
+			"line": "39",
+			"column": "9",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "MEDIUM",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "276",
+				"url": "https://cwe.mitre.org/data/definitions/276.html"
+			},
+			"rule_id": "G306",
+			"details": "Expect WriteFile permissions to be 0600 or less",
+			"file": "/home/ivan/Documents/go_projects/Day_6/DZ/main.go",
+			"code": "73: func (f FileStorage) Save(data string) error {\n74: \treturn os.WriteFile(f.Filename, []byte(data), 0644)\n75: }\n",
+			"line": "74",
+			"column": "9",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "MEDIUM",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "276",
+				"url": "https://cwe.mitre.org/data/definitions/276.html"
+			},
+			"rule_id": "G306",
+			"details": "Expect WriteFile permissions to be 0600 or less",
+			"file": "/home/ivan/Documents/go_projects/Day_20/task_1/main.go",
+			"code": "13: func (fm FileManager) Write(content string) error {\n14: \terr := os.WriteFile(fm.Filename, []byte(content), 0644)\n15: \tif err != nil {\n",
+			"line": "14",
+			"column": "9",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "LOW",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "703",
+				"url": "https://cwe.mitre.org/data/definitions/703.html"
+			},
+			"rule_id": "G104",
+			"details": "Errors unhandled",
+			"file": "/home/ivan/Documents/go_projects/Day_6/DZ/main.go",
+			"code": "138: \tmemoryStorage := \u0026MemoryStorage{}\n139: \tmemoryStorage.Save(\"Hello from memory!\")\n140: \tdata, _ = memoryStorage.Load()\n",
+			"line": "139",
+			"column": "2",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "LOW",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "703",
+				"url": "https://cwe.mitre.org/data/definitions/703.html"
+			},
+			"rule_id": "G104",
+			"details": "Errors unhandled",
+			"file": "/home/ivan/Documents/go_projects/Day_6/DZ/main.go",
+			"code": "133: \tfileStorage := FileStorage{Filename: \"data.txt\"}\n134: \tfileStorage.Save(\"Hello from file!\")\n135: \tdata, _ := fileStorage.Load()\n",
+			"line": "134",
+			"column": "2",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "LOW",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "703",
+				"url": "https://cwe.mitre.org/data/definitions/703.html"
+			},
+			"rule_id": "G104",
+			"details": "Errors unhandled",
+			"file": "/home/ivan/Documents/go_projects/Day_4/task_5/main.go",
+			"code": "52: \tcalcWithHistory(15, 4, \"-\")\n53: \tcalcWithHistory(8, 0, \"/\")\n54: \n",
+			"line": "53",
+			"column": "2",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "LOW",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "703",
+				"url": "https://cwe.mitre.org/data/definitions/703.html"
+			},
+			"rule_id": "G104",
+			"details": "Errors unhandled",
+			"file": "/home/ivan/Documents/go_projects/Day_4/task_5/main.go",
+			"code": "51: \tcalcWithHistory(10, 2, \"/\")\n52: \tcalcWithHistory(15, 4, \"-\")\n53: \tcalcWithHistory(8, 0, \"/\")\n",
+			"line": "52",
+			"column": "2",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "LOW",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "703",
+				"url": "https://cwe.mitre.org/data/definitions/703.html"
+			},
+			"rule_id": "G104",
+			"details": "Errors unhandled",
+			"file": "/home/ivan/Documents/go_projects/Day_4/task_5/main.go",
+			"code": "50: \tcalcWithHistory(5, 7, \"*\")\n51: \tcalcWithHistory(10, 2, \"/\")\n52: \tcalcWithHistory(15, 4, \"-\")\n",
+			"line": "51",
+			"column": "2",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "LOW",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "703",
+				"url": "https://cwe.mitre.org/data/definitions/703.html"
+			},
+			"rule_id": "G104",
+			"details": "Errors unhandled",
+			"file": "/home/ivan/Documents/go_projects/Day_4/task_5/main.go",
+			"code": "49: \tcalcWithHistory(3, 2, \"+\")\n50: \tcalcWithHistory(5, 7, \"*\")\n51: \tcalcWithHistory(10, 2, \"/\")\n",
+			"line": "50",
+			"column": "2",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "LOW",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "703",
+				"url": "https://cwe.mitre.org/data/definitions/703.html"
+			},
+			"rule_id": "G104",
+			"details": "Errors unhandled",
+			"file": "/home/ivan/Documents/go_projects/Day_4/task_5/main.go",
+			"code": "48: \n49: \tcalcWithHistory(3, 2, \"+\")\n50: \tcalcWithHistory(5, 7, \"*\")\n",
+			"line": "49",
+			"column": "2",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "LOW",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "703",
+				"url": "https://cwe.mitre.org/data/definitions/703.html"
+			},
+			"rule_id": "G104",
+			"details": "Errors unhandled",
+			"file": "/home/ivan/Documents/go_projects/Day_3/task_4/main.go",
+			"code": "19: \t\tfmt.Print(\"Введите ваше предположение: \")\n20: \t\tfmt.Scan(\u0026guess)\n21: \t\tattempts++\n",
+			"line": "20",
+			"column": "3",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "LOW",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "703",
+				"url": "https://cwe.mitre.org/data/definitions/703.html"
+			},
+			"rule_id": "G104",
+			"details": "Errors unhandled",
+			"file": "/home/ivan/Documents/go_projects/Day_3/task_1/main.go",
+			"code": "6: \tvar a int\n7: \tfmt.Scan(\u0026a)\n8: \tif a \u003c 18 {\n",
+			"line": "7",
+			"column": "2",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "LOW",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "703",
+				"url": "https://cwe.mitre.org/data/definitions/703.html"
+			},
+			"rule_id": "G104",
+			"details": "Errors unhandled",
+			"file": "/home/ivan/Documents/go_projects/Day_24/task_3/main.go",
+			"code": "93: \tvar logs []Log\n94: \tdb.Select(\u0026logs, \"SELECT * FROM logs\")\n95: \tfor _, l := range logs {\n",
+			"line": "94",
+			"column": "2",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "LOW",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "703",
+				"url": "https://cwe.mitre.org/data/definitions/703.html"
+			},
+			"rule_id": "G104",
+			"details": "Errors unhandled",
+			"file": "/home/ivan/Documents/go_projects/Day_24/task_3/main.go",
+			"code": "84: \tvar users []User\n85: \tdb.Select(\u0026users, \"SELECT * FROM users\")\n86: \tfor _, u := range users {\n",
+			"line": "85",
+			"column": "2",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "LOW",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "703",
+				"url": "https://cwe.mitre.org/data/definitions/703.html"
+			},
+			"rule_id": "G104",
+			"details": "Errors unhandled",
+			"file": "/home/ivan/Documents/go_projects/Day_23/task_3/main.go",
+			"code": "85: \tvar logs []string\n86: \tdb.Select(\u0026logs, \"SELECT action FROM logs\")\n87: \tfor _, l := range logs {\n",
+			"line": "86",
+			"column": "2",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "LOW",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "703",
+				"url": "https://cwe.mitre.org/data/definitions/703.html"
+			},
+			"rule_id": "G104",
+			"details": "Errors unhandled",
+			"file": "/home/ivan/Documents/go_projects/Day_23/task_3/main.go",
+			"code": "79: \tvar users []User\n80: \tdb.Select(\u0026users, \"SELECT * FROM users\")\n81: \tfmt.Println(users)\n",
+			"line": "80",
+			"column": "2",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "LOW",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "703",
+				"url": "https://cwe.mitre.org/data/definitions/703.html"
+			},
+			"rule_id": "G104",
+			"details": "Errors unhandled",
+			"file": "/home/ivan/Documents/go_projects/Day_23/task_2/main.go",
+			"code": "81: \t// Проверка после удаления\n82: \tdb.Select(\u0026users, \"SELECT * FROM users\")\n83: \tfmt.Println(\"Осталось пользователей:\", users)\n",
+			"line": "82",
+			"column": "2",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "LOW",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "703",
+				"url": "https://cwe.mitre.org/data/definitions/703.html"
+			},
+			"rule_id": "G104",
+			"details": "Errors unhandled",
+			"file": "/home/ivan/Documents/go_projects/Day_23/task_2/main.go",
+			"code": "73: \t// Проверка обновления\n74: \tdb.Get(\u0026user, \"SELECT * FROM users WHERE name = $1\", \"Ivan\")\n75: \tfmt.Printf(\"После обновления: %+v\\n\", user)\n",
+			"line": "74",
+			"column": "2",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "LOW",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "703",
+				"url": "https://cwe.mitre.org/data/definitions/703.html"
+			},
+			"rule_id": "G104",
+			"details": "Errors unhandled",
+			"file": "/home/ivan/Documents/go_projects/Day_22/task_4/main.go",
+			"code": "131: \t\tvar age int\n132: \t\trows.Scan(\u0026id, \u0026name, \u0026email, \u0026age)\n133: \t\tfmt.Printf(\"ID: %d, Имя: %s, Email: %s, Возраст: %d\\n\", id, name, email, age)\n",
+			"line": "132",
+			"column": "3",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "LOW",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "703",
+				"url": "https://cwe.mitre.org/data/definitions/703.html"
+			},
+			"rule_id": "G104",
+			"details": "Errors unhandled",
+			"file": "/home/ivan/Documents/go_projects/Day_22/task_4/main.go",
+			"code": "106: \t\tvar age int\n107: \t\trows.Scan(\u0026name, \u0026age)\n108: \t\tfmt.Printf(\"После обновления: %s, возраст: %d\\n\", name, age)\n",
+			"line": "107",
+			"column": "3",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "LOW",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "703",
+				"url": "https://cwe.mitre.org/data/definitions/703.html"
+			},
+			"rule_id": "G104",
+			"details": "Errors unhandled",
+			"file": "/home/ivan/Documents/go_projects/Day_21/task_3/main.go",
+			"code": "123: \n124: \thttp.ListenAndServe(\":8080\", nil)\n125: }\n",
+			"line": "124",
+			"column": "2",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "LOW",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "703",
+				"url": "https://cwe.mitre.org/data/definitions/703.html"
+			},
+			"rule_id": "G104",
+			"details": "Errors unhandled",
+			"file": "/home/ivan/Documents/go_projects/Day_21/task_3/main.go",
+			"code": "76: \tw.WriteHeader(http.StatusCreated)\n77: \tjson.NewEncoder(w).Encode(newUser)\n78: }\n",
+			"line": "77",
+			"column": "2",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "LOW",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "703",
+				"url": "https://cwe.mitre.org/data/definitions/703.html"
+			},
+			"rule_id": "G104",
+			"details": "Errors unhandled",
+			"file": "/home/ivan/Documents/go_projects/Day_21/task_3/main.go",
+			"code": "42: \t\t\tw.Header().Set(\"Content-Type\", \"application/json\")\n43: \t\t\tjson.NewEncoder(w).Encode(user)\n44: \t\t\treturn\n",
+			"line": "43",
+			"column": "4",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "LOW",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "703",
+				"url": "https://cwe.mitre.org/data/definitions/703.html"
+			},
+			"rule_id": "G104",
+			"details": "Errors unhandled",
+			"file": "/home/ivan/Documents/go_projects/Day_21/task_3/main.go",
+			"code": "27: \tw.Header().Set(\"Content-Type\", \"application/json\")\n28: \tjson.NewEncoder(w).Encode(users)\n29: }\n",
+			"line": "28",
+			"column": "2",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "LOW",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "703",
+				"url": "https://cwe.mitre.org/data/definitions/703.html"
+			},
+			"rule_id": "G104",
+			"details": "Errors unhandled",
+			"file": "/home/ivan/Documents/go_projects/Day_20/task_3/main.go",
+			"code": "177: \n178: \thttp.ListenAndServe(\":8080\", nil)\n179: }\n",
+			"line": "178",
+			"column": "2",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "LOW",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "703",
+				"url": "https://cwe.mitre.org/data/definitions/703.html"
+			},
+			"rule_id": "G104",
+			"details": "Errors unhandled",
+			"file": "/home/ivan/Documents/go_projects/Day_20/task_3/main.go",
+			"code": "164: func main() {\n165: \tos.MkdirAll(\"uploads\", 0755)\n166: \n",
+			"line": "165",
+			"column": "2",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "LOW",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "703",
+				"url": "https://cwe.mitre.org/data/definitions/703.html"
+			},
+			"rule_id": "G104",
+			"details": "Errors unhandled",
+			"file": "/home/ivan/Documents/go_projects/Day_20/task_3/main.go",
+			"code": "137: \n138: \tio.Copy(w, file)\n139: }\n",
+			"line": "138",
+			"column": "2",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "LOW",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "703",
+				"url": "https://cwe.mitre.org/data/definitions/703.html"
+			},
+			"rule_id": "G104",
+			"details": "Errors unhandled",
+			"file": "/home/ivan/Documents/go_projects/Day_20/task_2/main.go",
+			"code": "73: \n74: \thttp.ListenAndServe(\":8080\", nil)\n75: }\n",
+			"line": "74",
+			"column": "2",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "LOW",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "703",
+				"url": "https://cwe.mitre.org/data/definitions/703.html"
+			},
+			"rule_id": "G104",
+			"details": "Errors unhandled",
+			"file": "/home/ivan/Documents/go_projects/Day_19/task_3/main.go",
+			"code": "86: \tfmt.Println(\"\\nPress Enter to shutdown...\")\n87: \tfmt.Scanln()\n88: \n",
+			"line": "87",
+			"column": "2",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "LOW",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "703",
+				"url": "https://cwe.mitre.org/data/definitions/703.html"
+			},
+			"rule_id": "G104",
+			"details": "Errors unhandled",
+			"file": "/home/ivan/Documents/go_projects/Day_19/task_2/main.go",
+			"code": "60: \tfmt.Println(\"\\nPress Enter to shutdown...\")\n61: \tfmt.Scanln()\n62: \n",
+			"line": "61",
+			"column": "2",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "LOW",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "703",
+				"url": "https://cwe.mitre.org/data/definitions/703.html"
+			},
+			"rule_id": "G104",
+			"details": "Errors unhandled",
+			"file": "/home/ivan/Documents/go_projects/Day_19/task_1/main.go",
+			"code": "51: \tfmt.Println(\"\\nPrint Enter to shutdown...\")\n52: \tfmt.Scanln()\n53: \n",
+			"line": "52",
+			"column": "2",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "LOW",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "703",
+				"url": "https://cwe.mitre.org/data/definitions/703.html"
+			},
+			"rule_id": "G104",
+			"details": "Errors unhandled",
+			"file": "/home/ivan/Documents/go_projects/Day_18/task_3/main.go",
+			"code": "164: \tfmt.Println(\"\\nPress Enter to shutdown...\")\n165: \tfmt.Scanln()\n166: \n",
+			"line": "165",
+			"column": "2",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "LOW",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "703",
+				"url": "https://cwe.mitre.org/data/definitions/703.html"
+			},
+			"rule_id": "G104",
+			"details": "Errors unhandled",
+			"file": "/home/ivan/Documents/go_projects/Day_18/task_3/main.go",
+			"code": "78: \tw.WriteHeader(http.StatusCreated)\n79: \tjson.NewEncoder(w).Encode(newUser)\n80: }\n",
+			"line": "79",
+			"column": "2",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "LOW",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "703",
+				"url": "https://cwe.mitre.org/data/definitions/703.html"
+			},
+			"rule_id": "G104",
+			"details": "Errors unhandled",
+			"file": "/home/ivan/Documents/go_projects/Day_18/task_3/main.go",
+			"code": "44: \t\t\tw.Header().Set(\"Content-Type\", \"application/json\")\n45: \t\t\tjson.NewEncoder(w).Encode(user)\n46: \t\t\treturn\n",
+			"line": "45",
+			"column": "4",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "LOW",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "703",
+				"url": "https://cwe.mitre.org/data/definitions/703.html"
+			},
+			"rule_id": "G104",
+			"details": "Errors unhandled",
+			"file": "/home/ivan/Documents/go_projects/Day_18/task_3/main.go",
+			"code": "29: \tw.Header().Set(\"Content-Type\", \"application/json\")\n30: \tjson.NewEncoder(w).Encode(users)\n31: }\n",
+			"line": "30",
+			"column": "2",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "LOW",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "703",
+				"url": "https://cwe.mitre.org/data/definitions/703.html"
+			},
+			"rule_id": "G104",
+			"details": "Errors unhandled",
+			"file": "/home/ivan/Documents/go_projects/Day_18/task_2/main.go",
+			"code": "133: \n134: \thttp.ListenAndServe(\":8080\", nil)\n135: }\n",
+			"line": "134",
+			"column": "2",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "LOW",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "703",
+				"url": "https://cwe.mitre.org/data/definitions/703.html"
+			},
+			"rule_id": "G104",
+			"details": "Errors unhandled",
+			"file": "/home/ivan/Documents/go_projects/Day_18/task_2/main.go",
+			"code": "76: \tw.WriteHeader(http.StatusCreated)\n77: \tjson.NewEncoder(w).Encode(newUser)\n78: }\n",
+			"line": "77",
+			"column": "2",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "LOW",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "703",
+				"url": "https://cwe.mitre.org/data/definitions/703.html"
+			},
+			"rule_id": "G104",
+			"details": "Errors unhandled",
+			"file": "/home/ivan/Documents/go_projects/Day_18/task_2/main.go",
+			"code": "42: \t\t\tw.Header().Set(\"Content-Type\", \"application/json\")\n43: \t\t\tjson.NewEncoder(w).Encode(user)\n44: \t\t\treturn\n",
+			"line": "43",
+			"column": "4",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "LOW",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "703",
+				"url": "https://cwe.mitre.org/data/definitions/703.html"
+			},
+			"rule_id": "G104",
+			"details": "Errors unhandled",
+			"file": "/home/ivan/Documents/go_projects/Day_18/task_2/main.go",
+			"code": "27: \tw.Header().Set(\"Content-Type\", \"application/json\")\n28: \tjson.NewEncoder(w).Encode(users)\n29: }\n",
+			"line": "28",
+			"column": "2",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "LOW",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "703",
+				"url": "https://cwe.mitre.org/data/definitions/703.html"
+			},
+			"rule_id": "G104",
+			"details": "Errors unhandled",
+			"file": "/home/ivan/Documents/go_projects/Day_18/task_1/main.go",
+			"code": "144: \n145: \thttp.ListenAndServe(\":8080\", nil)\n146: }\n",
+			"line": "145",
+			"column": "2",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "LOW",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "703",
+				"url": "https://cwe.mitre.org/data/definitions/703.html"
+			},
+			"rule_id": "G104",
+			"details": "Errors unhandled",
+			"file": "/home/ivan/Documents/go_projects/Day_18/task_1/main.go",
+			"code": "76: \tw.WriteHeader(http.StatusCreated)\n77: \tjson.NewEncoder(w).Encode(newUser)\n78: }\n",
+			"line": "77",
+			"column": "2",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "LOW",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "703",
+				"url": "https://cwe.mitre.org/data/definitions/703.html"
+			},
+			"rule_id": "G104",
+			"details": "Errors unhandled",
+			"file": "/home/ivan/Documents/go_projects/Day_18/task_1/main.go",
+			"code": "42: \t\t\tw.Header().Set(\"Content-Type\", \"application/json\")\n43: \t\t\tjson.NewEncoder(w).Encode(user)\n44: \t\t\treturn\n",
+			"line": "43",
+			"column": "4",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "LOW",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "703",
+				"url": "https://cwe.mitre.org/data/definitions/703.html"
+			},
+			"rule_id": "G104",
+			"details": "Errors unhandled",
+			"file": "/home/ivan/Documents/go_projects/Day_18/task_1/main.go",
+			"code": "27: \tw.Header().Set(\"Content-Type\", \"application/json\")\n28: \tjson.NewEncoder(w).Encode(users)\n29: }\n",
+			"line": "28",
+			"column": "2",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "LOW",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "703",
+				"url": "https://cwe.mitre.org/data/definitions/703.html"
+			},
+			"rule_id": "G104",
+			"details": "Errors unhandled",
+			"file": "/home/ivan/Documents/go_projects/Day_17/task_3/main.go",
+			"code": "154: \n155: \thttp.ListenAndServe(\":8080\", nil)\n156: }\n",
+			"line": "155",
+			"column": "2",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "LOW",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "703",
+				"url": "https://cwe.mitre.org/data/definitions/703.html"
+			},
+			"rule_id": "G104",
+			"details": "Errors unhandled",
+			"file": "/home/ivan/Documents/go_projects/Day_17/task_3/main.go",
+			"code": "84: \tw.WriteHeader(http.StatusCreated)\n85: \tjson.NewEncoder(w).Encode(newUser)\n86: }\n",
+			"line": "85",
+			"column": "2",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "LOW",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "703",
+				"url": "https://cwe.mitre.org/data/definitions/703.html"
+			},
+			"rule_id": "G104",
+			"details": "Errors unhandled",
+			"file": "/home/ivan/Documents/go_projects/Day_17/task_3/main.go",
+			"code": "50: \t\t\tw.Header().Set(\"Content-Type\", \"application/json\")\n51: \t\t\tjson.NewEncoder(w).Encode(user)\n52: \t\t\treturn\n",
+			"line": "51",
+			"column": "4",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "LOW",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "703",
+				"url": "https://cwe.mitre.org/data/definitions/703.html"
+			},
+			"rule_id": "G104",
+			"details": "Errors unhandled",
+			"file": "/home/ivan/Documents/go_projects/Day_17/task_3/main.go",
+			"code": "32: \tw.Header().Set(\"Content-Type\", \"application/json\")\n33: \tjson.NewEncoder(w).Encode(users)\n34: }\n",
+			"line": "33",
+			"column": "2",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "LOW",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "703",
+				"url": "https://cwe.mitre.org/data/definitions/703.html"
+			},
+			"rule_id": "G104",
+			"details": "Errors unhandled",
+			"file": "/home/ivan/Documents/go_projects/Day_16/task_3/main.go",
+			"code": "31: \tfmt.Println(\"  /panic - вызывает панику и перехватывает её\")\n32: \thttp.ListenAndServe(\":8080\", nil)\n33: }\n",
+			"line": "32",
+			"column": "2",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "LOW",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "703",
+				"url": "https://cwe.mitre.org/data/definitions/703.html"
+			},
+			"rule_id": "G104",
+			"details": "Errors unhandled",
+			"file": "/home/ivan/Documents/go_projects/Day_16/task_2/main.go",
+			"code": "38: \tfmt.Println(\"  /admin - требует X-API-Key: 123\")\n39: \thttp.ListenAndServe(\":8080\", nil)\n40: }\n",
+			"line": "39",
+			"column": "2",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "LOW",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "703",
+				"url": "https://cwe.mitre.org/data/definitions/703.html"
+			},
+			"rule_id": "G104",
+			"details": "Errors unhandled",
+			"file": "/home/ivan/Documents/go_projects/Day_16/task_1/main.go",
+			"code": "39: \tfmt.Println(\"Server on http://localhost:8080\")\n40: \thttp.ListenAndServe(\":8080\", nil)\n41: }\n",
+			"line": "40",
+			"column": "2",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "LOW",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "703",
+				"url": "https://cwe.mitre.org/data/definitions/703.html"
+			},
+			"rule_id": "G104",
+			"details": "Errors unhandled",
+			"file": "/home/ivan/Documents/go_projects/Day_15/task_4/main.go",
+			"code": "69: \n70: \thttp.ListenAndServe(\":8080\", handler)\n71: }\n",
+			"line": "70",
+			"column": "2",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "LOW",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "703",
+				"url": "https://cwe.mitre.org/data/definitions/703.html"
+			},
+			"rule_id": "G104",
+			"details": "Errors unhandled",
+			"file": "/home/ivan/Documents/go_projects/Day_15/task_3/main.go",
+			"code": "71: \tfmt.Println(\"Server on http://localhost:8080\")\n72: \thttp.ListenAndServe(\":8080\", handler)\n73: }\n",
+			"line": "72",
+			"column": "2",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "LOW",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "703",
+				"url": "https://cwe.mitre.org/data/definitions/703.html"
+			},
+			"rule_id": "G104",
+			"details": "Errors unhandled",
+			"file": "/home/ivan/Documents/go_projects/Day_15/task_2/main.go",
+			"code": "40: \n41: \thttp.ListenAndServe(\":8080\", nil)\n42: }\n",
+			"line": "41",
+			"column": "2",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "LOW",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "703",
+				"url": "https://cwe.mitre.org/data/definitions/703.html"
+			},
+			"rule_id": "G104",
+			"details": "Errors unhandled",
+			"file": "/home/ivan/Documents/go_projects/Day_15/task_1/main.go",
+			"code": "30: \n31: \thttp.ListenAndServe(\":8080\", nil)\n32: }\n",
+			"line": "31",
+			"column": "2",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "LOW",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "703",
+				"url": "https://cwe.mitre.org/data/definitions/703.html"
+			},
+			"rule_id": "G104",
+			"details": "Errors unhandled",
+			"file": "/home/ivan/Documents/go_projects/Day_15/main.go",
+			"code": "75: \tfmt.Println(\"  /calc?a=10\u0026b=5\u0026op=+  - 15\")\n76: \thttp.ListenAndServe(\":8080\", nil)\n77: }\n",
+			"line": "76",
+			"column": "2",
+			"nosec": false,
+			"suppressions": null
+		},
+		{
+			"severity": "LOW",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "703",
+				"url": "https://cwe.mitre.org/data/definitions/703.html"
+			},
+			"rule_id": "G104",
+			"details": "Errors unhandled",
+			"file": "/home/ivan/Documents/go_projects/Day_13/task_4/main.go",
+			"code": "57: \tfmt.Println(\"Проверка: http://localhost:8080/process?data=hello\")\n58: \thttp.ListenAndServe(\":8080\", nil)\n59: }\n",
+			"line": "58",
+			"column": "2",
+			"nosec": false,
+			"suppressions": null
+		}
+	],
+	"Stats": {
+		"files": 92,
+		"lines": 5496,
+		"nosec": 0,
+		"found": 107
+	},
+	"GosecVersion": "dev"
+}

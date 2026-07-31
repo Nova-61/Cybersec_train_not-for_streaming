@@ -1,0 +1,10 @@
+{
+    "includes": [
+        "G101", "G104", "G202", "G401"
+    ],
+    "excludes": [
+        "G201", "G301"
+    ],
+    "severity": "high",
+    "confidence": "high"
+}
