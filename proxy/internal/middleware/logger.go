@@ -12,8 +12,8 @@ type responseWriter struct {
 }
 
 func (rw *responseWriter) WriteHeader(code int) {
-    rw.status = code
-    rw.ResponseWriter.WriteHeader(code)
+	rw.status = code
+	rw.ResponseWriter.WriteHeader(code)
 }
 
 func getClientIP(r *http.Request) string {

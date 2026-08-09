@@ -1,4 +1,4 @@
-﻿package main
+package main
 
 import (
 	"bufio"
@@ -9,8 +9,8 @@ import (
 	"net/http"
 	"os"
 	"os/signal"
-	"strings"
 	"strconv"
+	"strings"
 	"syscall"
 	"time"
 
@@ -19,8 +19,6 @@ import (
 	"proxy/internal/middleware"
 )
 
-// loadDotEnv loads simple KEY=VALUE pairs from .env into the process environment
-// without overwriting already-set environment variables.
 func loadDotEnv(path string) {
 	f, err := os.Open(path)
 	if err != nil {
@@ -63,9 +61,7 @@ func getEnvInt(key string, def int) int {
 }
 
 func main() {
-	// Load .env if present so flag defaults can be set from environment
 	loadDotEnv(".env")
-
 	listenAddr := flag.String("listen", getEnv("LISTEN_ADDR", ":8888"), "адрес для прокси")
 	targetURL := flag.String("target", getEnv("TARGET_URL", "http://localhost:8080"), "целевой сервер")
 	rateLimit := flag.Int("rate-limit", getEnvInt("RATE_LIMIT", 10), "максимум запросов в минуту")
