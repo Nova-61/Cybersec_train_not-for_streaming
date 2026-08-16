@@ -4,29 +4,48 @@ import (
 	"time"
 )
 
-type User struct { // Модель пользователя, которая представляет собой структуру данных, содержащую информацию о пользователе в системе.
+// User — то, что хранится в базе данных
+type User struct {
 	ID        int       `json:"id" db:"id"`
 	Username  string    `json:"username" db:"username"`
-	Password  string    `json:"-" db:"password"` // Никогда не возвращай пароль в ответе на запрос, поэтому используем тег json:"-" чтобы скрыть его при сериализации в JSON.
 	Email     string    `json:"email" db:"email"`
+	Password  string    `json:"-" db:"password"` // "-" значит: никогда не выводить в JSON
 	CreatedAt time.Time `json:"created_at" db:"created_at"`
 	UpdatedAt time.Time `json:"updated_at" db:"updated_at"`
 }
 
-type RegisterRequest struct { // Запрос на регистрацию нового пользователя
+// RegisterRequest — то, что клиент присылает на /register
+type RegisterRequest struct {
 	Username string `json:"username"`
-	Password string `json:"password"`
 	Email    string `json:"email"`
+	Password string `json:"password"`
 }
 
-type LoginRequest struct { // Запрос на аутентификацию пользователя
+// LoginRequest — то, что клиент присылает на /login
+type LoginRequest struct {
 	Username string `json:"username"`
 	Password string `json:"password"`
 }
 
-type AuthResponse struct { // Отдаем пользователю токены после успешной аутентификации (Это типо как билет в кинотеатр, который подтверждает, что пользователь прошел проверку и может получить доступ к защищенным ресурсам)
+// AuthResponse — то, что мы отдаём клиенту после логина/регистрации/refresh
+type AuthResponse struct {
 	AccessToken  string `json:"access_token"`
 	RefreshToken string `json:"refresh_token"`
 	TokenType    string `json:"token_type"`
-	ExpiresIn    int64  `json:"expires_in"`
+	ExpiresIn    int    `json:"expires_in"`
+}
+
+// RefreshRequest — то, что клиент присылает на /refresh
+type RefreshRequest struct {
+	RefreshToken string `json:"refresh_token"`
+}
+
+// Session — то, что мы храним в Redis. Не путать с моделью User —
+// это отдельная сущность про конкретный "заход" пользователя в систему.
+type Session struct {
+	UserID       int       `json:"user_id"`
+	AccessToken  string    `json:"access_token"`
+	RefreshToken string    `json:"refresh_token"`
+	CreatedAt    time.Time `json:"created_at"`
+	ExpiresAt    time.Time `json:"expires_at"`
 }
