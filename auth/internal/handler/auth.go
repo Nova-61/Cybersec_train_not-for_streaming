@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"auth/internal/config"
+	"auth/internal/middleware"
 	"auth/internal/models"
 	"auth/internal/repository"
 	"auth/internal/utils"
@@ -82,7 +83,7 @@ func (h *AuthHandler) Register(w http.ResponseWriter, r *http.Request) {
 	h.issueTokensAndRespond(w, r.Context(), user, http.StatusCreated)
 }
 
-// issueTokensAndRespond - общая логика для Register и Login:
+// issueTokensAndRespond — общая логика для Register и Login:
 // генерирует пару токенов, сохраняет сессию в Redis, отвечает клиенту.
 func (h *AuthHandler) issueTokensAndRespond(w http.ResponseWriter, ctx context.Context, user *models.User, statusCode int) {
 	accessToken, err := h.jwtManager.GenerateAccessToken(user.ID, user.Username)
@@ -150,4 +151,94 @@ func (h *AuthHandler) Login(w http.ResponseWriter, r *http.Request) {
 	h.issueTokensAndRespond(w, r.Context(), user, http.StatusOK)
 }
 
-//Честно говоря, я не уверен, что это правильный способ сделать logout. Я просто удаляю сессию из Redis, и всё. Но если кто-то ещё где-то хранит refresh-токен, он всё равно сможет получить новый access-токен. Поэтому в реальной жизни нужно ещё как-то инвалидировать refresh-токен, например, хранить их в БД и помечать как "использованный" или "отозванный". Но для учебного проекта этого достаточно.
+func (h *AuthHandler) Refresh(w http.ResponseWriter, r *http.Request) {
+	var req models.RefreshRequest
+	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+		http.Error(w, "Invalid request body", http.StatusBadRequest)
+		return
+	}
+	if req.RefreshToken == "" {
+		http.Error(w, "Refresh token is required", http.StatusBadRequest)
+		return
+	}
+
+	// 1. Проверяем подпись, срок действия и тип токена (см. utils/jwt.go)
+	userID, err := h.jwtManager.ValidateRefreshToken(req.RefreshToken)
+	if err != nil {
+		http.Error(w, "Invalid refresh token", http.StatusUnauthorized)
+		return
+	}
+
+	// 2. Пользователь мог быть удалён после выдачи токена — перепроверяем
+	user, err := h.userRepo.GetByID(userID)
+	if err != nil {
+		http.Error(w, "Internal server error", http.StatusInternalServerError)
+		return
+	}
+	if user == nil {
+		http.Error(w, "User not found", http.StatusUnauthorized)
+		return
+	}
+
+	// 3. Ключевая проверка: токен должен совпадать с тем, что лежит в Redis.
+	// Если сессия была удалена (logout) или уже обновлена другим запросом —
+	// этот refresh-токен больше не действителен, даже если подпись валидна.
+	ctx := r.Context()
+	session, err := h.sessionRepo.Get(ctx, userID)
+	if err != nil {
+		http.Error(w, "Internal server error", http.StatusInternalServerError)
+		return
+	}
+	if session == nil || session.RefreshToken != req.RefreshToken {
+		http.Error(w, "Invalid refresh token", http.StatusUnauthorized)
+		return
+	}
+
+	// 4. Всё ок — выдаём новую пару токенов (refresh token rotation)
+	h.issueTokensAndRespond(w, ctx, user, http.StatusOK)
+}
+
+// Logout удаляет сессию из Redis. См. обсуждение выше про ограничения этого подхода:
+// уже выданный access-токен остаётся валидным по подписи до истечения exp,
+// но обновить его через /refresh после этого будет уже нельзя.
+func (h *AuthHandler) Logout(w http.ResponseWriter, r *http.Request) {
+	userID, ok := r.Context().Value(middleware.UserIDContextKey).(int)
+	if !ok {
+		http.Error(w, "Unauthorized", http.StatusUnauthorized)
+		return
+	}
+
+	if err := h.sessionRepo.Delete(r.Context(), userID); err != nil {
+		http.Error(w, "Failed to logout", http.StatusInternalServerError)
+		return
+	}
+
+	w.WriteHeader(http.StatusNoContent)
+}
+
+// Validate — эндпоинт для других сервисов/клиента, чтобы проверить,
+// что access-токен ещё действителен и получить актуальные данные о пользователе
+func (h *AuthHandler) Validate(w http.ResponseWriter, r *http.Request) {
+	userID, ok := r.Context().Value(middleware.UserIDContextKey).(int)
+	if !ok {
+		http.Error(w, "Unauthorized", http.StatusUnauthorized)
+		return
+	}
+
+	user, err := h.userRepo.GetByID(userID)
+	if err != nil {
+		http.Error(w, "Internal server error", http.StatusInternalServerError)
+		return
+	}
+	if user == nil {
+		http.Error(w, "User not found", http.StatusUnauthorized)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(map[string]interface{}{
+		"valid":    true,
+		"user_id":  user.ID,
+		"username": user.Username,
+	})
+}
