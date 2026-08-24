@@ -10,6 +10,6 @@ func main() {
 	fmt.Printf("Go version: %s\n", runtime.Version())
 	fmt.Printf("Operating System: %s\n", runtime.GOOS)
 	fmt.Printf("Architecture: %s\n", runtime.GOARCH)
+	marshal := [5]int{5, 5, 5, 5, 5}
+	fmt.Println(marshal)
 }
-
-
