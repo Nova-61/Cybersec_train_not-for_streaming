@@ -1,5 +1,7 @@
 module siem-agent
 
-go 1.22.2
+go 1.23
 
-require github.com/fsnotify/fsnotify v1.7.0
+require github.com/fsnotify/fsnotify v1.10.1
+
+require golang.org/x/sys v0.13.0 // indirect
