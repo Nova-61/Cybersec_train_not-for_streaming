@@ -1,0 +1,14 @@
+services:
+  siem-agent:
+    build: .
+    volumes:
+      - /var/log:/var/log:ro
+      - ./config.json:/home/agent/config.json:ro
+    restart: unless-stopped
+
+  # Тестовый сервер для локальной проверки — НЕ для продакшена
+  test-server:
+    build:
+      context: ./test-server
+    ports:
+      - "8080:8080"
