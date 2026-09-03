@@ -1,0 +1,106 @@
+services:
+  # ============ PostgreSQL ============
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-password}
+      POSTGRES_DB: auth_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - security-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # ============ Redis ============
+  redis:
+    image: redis:7-alpine
+    volumes:
+      - redis_data:/data
+    networks:
+      - security-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # ============ Auth Service ============
+  auth:
+    build: ./auth
+    environment:
+      PORT: 8080
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASSWORD: ${DB_PASSWORD:-password}
+      DB_NAME: auth_db
+      REDIS_ADDR: redis:6379
+      REDIS_PASSWORD: ""
+      JWT_SECRET: ${JWT_SECRET:?JWT_SECRET must be set in .env, minimum 32 characters}
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - security-network
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:8080/validate"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+      start_period: 5s
+    restart: unless-stopped
+    # порт наружу НЕ пробрасываем: единственная точка входа снаружи — proxy
+
+  # ============ Proxy ============
+  proxy:
+    build: ./proxy
+    ports:
+      - "8888:8888"
+    environment:
+      TARGET_URL: http://auth:8080
+      RATE_LIMIT: ${RATE_LIMIT:-100}
+    depends_on:
+      auth:
+        condition: service_healthy
+    networks:
+      - security-network
+    restart: unless-stopped
+
+  # ============ SIEM Agent ============
+  siem:
+    build:
+      context: ./siem-agent
+      dockerfile: dockerfile.yml
+    volumes:
+      - /var/log:/var/log:ro
+      - ./siem-agent/config.json:/home/agent/config.json:ro
+    depends_on:
+      - log-collector
+    networks:
+      - security-network
+    restart: unless-stopped
+
+  # ============ Приёмник логов для SIEM (демо/тест) ============
+  log-collector:
+    build:
+      context: ./siem-agent/test-server
+      dockerfile: dockerfile.yml
+    ports:
+      - "8081:8080"
+    networks:
+      - security-network
+
+networks:
+  security-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+  redis_data:

@@ -1,0 +1,28 @@
+# Сборка — используем полноценный образ с компилятором Go
+FROM golang:1.22-alpine AS builder
+
+WORKDIR /app
+
+COPY go.mod go.sum ./
+RUN go mod download
+
+COPY . .
+RUN CGO_ENABLED=0 go build -o /siem-agent ./cmd/agent
+
+# Финальный образ — минимальный, без компилятора и лишнего
+FROM alpine:latest
+
+RUN apk --no-cache add ca-certificates && \
+    adduser -D -H agent
+
+WORKDIR /home/agent
+
+COPY --from=builder /siem-agent .
+RUN chown agent:agent /siem-agent
+
+USER agent
+
+VOLUME ["/var/log"]
+
+ENTRYPOINT ["./siem-agent"]
+CMD ["-config", "config.json"]

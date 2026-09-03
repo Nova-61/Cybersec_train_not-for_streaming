@@ -1,0 +1,9 @@
+{
+    "log_paths": ["/var/log/syslog", "/var/log/auth.log"],
+    "server_url": "http://log-collector:8080/api/logs",
+    "batch_size": 50,
+    "batch_interval": 5,
+    "retry_count": 3,
+    "retry_delay": 5,
+    "filter_level": "WARNING"
+}
