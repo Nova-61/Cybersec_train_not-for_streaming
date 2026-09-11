@@ -13,13 +13,15 @@ import (
 
 type Sender struct {
 	serverURL string
+	apiKey    string
 	client    *http.Client
 	retrier   *retry.Retrier
 }
 
-func NewSender(serverURL string, retryCount, retryDelaySeconds int) *Sender {
+func NewSender(serverURL, apiKey string, retryCount, retryDelaySeconds int) *Sender {
 	return &Sender{
 		serverURL: serverURL,
+		apiKey:    apiKey,
 		client:    &http.Client{Timeout: 10 * time.Second},
 		retrier:   retry.NewRetrier(retryCount, time.Duration(retryDelaySeconds)*time.Second),
 	}
@@ -46,6 +48,7 @@ func (s *Sender) SendBatch(batch []models.LogEntry) error {
 			return err
 		}
 		req.Header.Set("Content-Type", "application/json")
+		req.Header.Set("X-API-Key", s.apiKey)
 
 		resp, err := s.client.Do(req)
 		if err != nil {

@@ -1,0 +1,17 @@
+<h1>Все события</h1>
+
+<% if @events.any? %>
+  <ul>
+    <% @events.each do |event| %>
+      <li>
+        <strong><%= event.title %></strong>
+        — <%= event.event_time.strftime("%d.%m.%Y %H:%M") %>
+        <%= link_to "Подробнее", event_path(event) %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>Событий пока нет.</p>
+<% end %>
+
+<%= link_to "Добавить событие", new_event_path %>

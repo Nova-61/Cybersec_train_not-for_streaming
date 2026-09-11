@@ -1,0 +1,8 @@
+<h1><%= @event.title %></h1>
+
+<p><strong>Когда:</strong> <%= @event.event_time.strftime("%d.%m.%Y %H:%M") %></p>
+<p><strong>Описание:</strong> <%= @event.description %></p>
+
+<%= link_to "← Ко всем событиям", events_path %>
+<%= link_to "Редактировать", edit_event_path(@event) %>
+<%= button_to "Удалить", event_path(@event), method: :delete, data: { turbo_confirm: "Точно удалить?" } %>

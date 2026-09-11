@@ -12,6 +12,7 @@ import (
 type Config struct {
 	LogPaths      []string `json:"log_paths"`
 	ServerURL     string   `json:"server_url"`
+	APIKey        string   `json:"api_key"`
 	BatchSize     int      `json:"batch_size"`
 	BatchInterval int      `json:"batch_interval"` // секунд
 	RetryCount    int      `json:"retry_count"`
@@ -31,12 +32,12 @@ func Load(path string) (*Config, error) {
 	}
 
 	cfg := DefaultConfig() // начинаем с дефолтов, JSON перезапишет только то, что в нём есть
-// Unmarshal позволяет нам преобраазовать json в go выбирая только
-// то что нам нужно тоесть мы избегаем попытки заалить скрипт нам в базу
+	// Unmarshal позволяет нам преобраазовать json в go выбирая только
+	// то что нам нужно тоесть мы избегаем попытки заалить скрипт нам в базу
 	if err := json.Unmarshal(data, cfg); err != nil {
 		return nil, fmt.Errorf("failed to parse config file: %w", err)
 	}
-// Проверяем коректность конфига (код ниже через функцию)
+	// Проверяем коректность конфига (код ниже через функцию)
 	if err := cfg.Validate(); err != nil {
 		return nil, fmt.Errorf("invalid config: %w", err)
 	}
@@ -46,8 +47,9 @@ func Load(path string) (*Config, error) {
 
 func DefaultConfig() *Config {
 	return &Config{
-		LogPaths:      []string{"/var/log/syslog", "/var/log/auth.log"},
-		ServerURL:     "http://localhost:8080/api/logs",
+		LogPaths:      []string{`C:\Users\Ivan\Documents\go_projects\siem-agent\test.log`},
+		ServerURL:     "http://localhost:3000/api/v1/events",
+		APIKey:        "dev-secret-key-12345",
 		BatchSize:     100,
 		BatchInterval: 5,
 		RetryCount:    3,

@@ -39,7 +39,7 @@ func main() {
 
 	logParser := parser.NewParser()
 	logFilter := filter.NewFilter(cfg.FilterLevel)
-	logSender := sender.NewSender(cfg.ServerURL, cfg.RetryCount, cfg.RetryDelay)
+	logSender := sender.NewSender(cfg.ServerURL, cfg.APIKey, cfg.RetryCount, cfg.RetryDelay)
 
 	logReader.Start()
 

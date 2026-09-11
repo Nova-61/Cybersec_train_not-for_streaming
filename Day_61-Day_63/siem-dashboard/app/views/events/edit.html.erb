@@ -1,0 +1,22 @@
+<h1>Редактировать событие</h1>
+
+<%= form_with model: @event do |form| %>
+  <div>
+    <%= form.label :title, "Название" %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div>
+    <%= form.label :description, "Описание" %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div>
+    <%= form.label :event_time, "Дата и время" %>
+    <%= form.datetime_field :event_time %>
+  </div>
+
+  <%= form.submit "Сохранить" %>
+<% end %>
+
+<%= link_to "← Ко всем событиям", events_path %>

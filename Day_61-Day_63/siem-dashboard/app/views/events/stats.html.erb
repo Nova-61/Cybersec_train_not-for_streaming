@@ -1,0 +1,55 @@
+<h1>Статистика событий</h1>
+
+<div style="display: flex; gap: 20px; flex-wrap: wrap;">
+  <div style="
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 8px;
+    min-width: 150px;
+    text-align: center;
+    background-color: #f0f0f0;
+  ">
+    <h3>Всего</h3>
+    <p style="font-size: 32px; font-weight: bold;"><%= @total %></p>
+  </div>
+  
+  <div style="
+    border: 1px solid #44aa44;
+    padding: 20px;
+    border-radius: 8px;
+    min-width: 150px;
+    text-align: center;
+    background-color: #e8f5e9;
+  ">
+    <h3>INFO</h3>
+    <p style="font-size: 32px; font-weight: bold; color: #44aa44;"><%= @info %></p>
+  </div>
+  
+  <div style="
+    border: 1px solid #ffaa00;
+    padding: 20px;
+    border-radius: 8px;
+    min-width: 150px;
+    text-align: center;
+    background-color: #fff3e0;
+  ">
+    <h3>WARNING</h3>
+    <p style="font-size: 32px; font-weight: bold; color: #ffaa00;"><%= @warning %></p>
+  </div>
+  
+  <div style="
+    border: 1px solid #ff4444;
+    padding: 20px;
+    border-radius: 8px;
+    min-width: 150px;
+    text-align: center;
+    background-color: #ffebee;
+  ">
+    <h3>ERROR</h3>
+    <p style="font-size: 32px; font-weight: bold; color: #ff4444;"><%= @error %></p>
+  </div>
+</div>
+
+<div style="margin-top: 20px;">
+  <%= link_to "Назад к списку", events_path %>
+</div>
