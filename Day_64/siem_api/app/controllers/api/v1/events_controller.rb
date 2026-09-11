@@ -37,7 +37,7 @@ module Api
         }, status: status
       end
 
-      # Одиночный режим — для ручных тестов через curl с {"event": {...}}
+      # Оставляю и одиночный режим — вдруг понадобится для ручного теста через curl
       def create_single
         event = Event.new(event_params)
         if event.save
