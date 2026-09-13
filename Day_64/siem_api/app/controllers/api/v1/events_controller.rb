@@ -1,67 +1,64 @@
 module Api
   module V1
     class EventsController < ApplicationController
-      skip_before_action :verify_authenticity_token
-      before_action :authenticate_api_key
+      # Этот контроллер обслуживает API версии v1.
+      # Маршрут для создания события: POST /api/v1/events.
 
+      # Go-агент отправляет обычный HTTP-запрос, а не HTML-форму.
+      # Поэтому у него нет CSRF-токена, который Rails обычно требует
+      # от браузерных форм. Для этого API-пути CSRF-проверка отключена.
+      skip_before_action :verify_authenticity_token
+
+      # Перед выполнением create Rails вызывает authenticate_api_key!.
+      # Go должен передать ключ в HTTP-заголовке X-API-Key.
+      before_action :authenticate_api_key!
+
+      # Принимает событие от Go-агента и сохраняет его в базу данных.
       def create
-        if params[:entries].present?
-          create_batch
+        # event_params содержит только разрешенные параметры из JSON-запроса.
+        @event = Event.new(event_params)
+
+        if @event.save
+          # Событие успешно сохранено.
+          # HTTP 201 означает Created, а в JSON возвращается созданная запись.
+          render json: @event, status: :created
         else
-          create_single
+          # Данные не прошли валидацию модели Event.
+          # HTTP 422 означает, что запрос понятен, но данные некорректны.
+          render json: { errors: @event.errors.full_messages }, status: :unprocessable_entity
         end
       end
 
       private
 
-      # Реальный Go-агент шлёт именно это: {"entries": [...], "count": N, "source": "siem-agent"}
-      def create_batch
-        created_ids = []
-        failed = []
-
-        entries_params.each do |entry|
-          event = Event.new(entry)
-          if event.save
-            created_ids << event.id
-          else
-            failed << { data: entry.to_h, errors: event.errors.full_messages }
-          end
-        end
-
-        status = failed.empty? ? :created : :multi_status
-        render json: {
-          status: failed.empty? ? "ok" : "partial",
-          created: created_ids.size,
-          failed: failed.size,
-          errors: failed
-        }, status: status
-      end
-
-      # Оставляю и одиночный режим — вдруг понадобится для ручного теста через curl
-      def create_single
-        event = Event.new(event_params)
-        if event.save
-          render json: { status: "ok", id: event.id, message: "Event saved" }, status: :created
-        else
-          render json: { status: "error", errors: event.errors.full_messages }, status: :unprocessable_entity
-        end
-      end
-
-      def authenticate_api_key
-        api_key = request.headers["X-API-Key"]
-        expected_key = ENV.fetch("SIEM_API_KEY", "dev-secret-key-12345")
-
-        unless api_key == expected_key
-          render json: { status: "error", message: "Unauthorized" }, status: :unauthorized
-        end
-      end
-
+      # Разрешает параметры, которые можно записать в Event.
+      # Из Go нужно отправлять JSON с вложенным объектом event, например:
+      # {
+      #   "event": {
+      #     "title": "Ошибка",
+      #     "description": "Описание ошибки",
+      #     "event_time": "2026-09-12T10:30:00Z"
+      #   }
+      # }
+      #
+      # params.require(:event) требует наличие объекта event.
+      # params.permit(...) защищает приложение от записи лишних полей.
       def event_params
-        params.require(:event).permit(:level, :message, :source, :user_id)
+        params.require(:event).permit(:title, :description, :event_time)
       end
 
-      def entries_params
-        params.require(:entries).map { |e| e.permit(:level, :message, :source) }
+      # Проверяет API-ключ Go-агента.
+      def authenticate_api_key!
+        # Секрет читается из config/credentials.yml.enc.
+        # В credentials должен быть записан ключ верхнего уровня:
+        # api_key: my_super_secret_key_12345
+        expected_key = Rails.application.credentials.api_key
+
+        # Ключ из заголовка должен полностью совпадать с ключом Rails.
+        # При несовпадении запрос получает HTTP 401 Unauthorized.
+        unless request.headers["X-API-Key"] == expected_key
+          render json: { error: "Неверный API-ключ" }, status: :unauthorized
+        end
       end
     end
   end
