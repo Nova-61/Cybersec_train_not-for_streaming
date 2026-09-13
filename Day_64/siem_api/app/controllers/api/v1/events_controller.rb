@@ -35,16 +35,16 @@ module Api
       # Из Go нужно отправлять JSON с вложенным объектом event, например:
       # {
       #   "event": {
-      #     "title": "Ошибка",
-      #     "description": "Описание ошибки",
-      #     "event_time": "2026-09-12T10:30:00Z"
+      #     "level": "ERROR",
+      #     "message": "Описание ошибки",
+      #     "source": "go-agent-01"
       #   }
       # }
       #
       # params.require(:event) требует наличие объекта event.
       # params.permit(...) защищает приложение от записи лишних полей.
       def event_params
-        params.require(:event).permit(:title, :description, :event_time)
+        params.require(:event).permit(:level, :message, :source)
       end
 
       # Проверяет API-ключ Go-агента.
