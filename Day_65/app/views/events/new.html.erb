@@ -1,0 +1,22 @@
+<h1>Новое событие</h1>
+
+<%= form_with model: @event do |form| %>
+  <div>
+    <%= form.label :level, "Уровень" %>
+    <%= form.select :level, %w[INFO WARNING ERROR DEBUG CRITICAL] %>
+  </div>
+
+  <div>
+    <%= form.label :source, "Источник" %>
+    <%= form.text_field :source %>
+  </div>
+
+  <div>
+    <%= form.label :message, "Сообщение" %>
+    <%= form.text_area :message %>
+  </div>
+
+  <%= form.submit "Создать" %>
+<% end %>
+
+<p><%= link_to "← Ко всем событиям", events_path %></p>
