@@ -1,0 +1,22 @@
+<div class="card">
+  <div class="card-header d-flex justify-content-between align-items-center">
+    <span>Событие #<%= @event.id %></span>
+    <span class="badge bg-<%= level_badge_color(@event.level) %>"><%= @event.level %></span>
+  </div>
+  <div class="card-body">
+    <p><strong>Источник:</strong> <%= @event.source %></p>
+    <p><strong>Сообщение:</strong> <%= @event.message %></p>
+    <p class="text-muted mb-0">
+      <small>Создано: <%= @event.created_at.strftime("%d.%m.%Y %H:%M") %></small>
+    </p>
+  </div>
+  <div class="card-footer d-flex gap-2">
+    <%= link_to "← Ко всем событиям", events_path, class: "btn btn-outline-secondary" %>
+    <% if policy(@event).update? %>
+      <%= link_to "Редактировать", edit_event_path(@event), class: "btn btn-warning" %>
+    <% end %>
+    <% if policy(@event).destroy? %>
+      <%= button_to "Удалить", event_path(@event), method: :delete, class: "btn btn-danger", data: { turbo_confirm: "Точно удалить?" } %>
+    <% end %>
+  </div>
+</div>

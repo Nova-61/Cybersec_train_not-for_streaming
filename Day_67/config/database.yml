@@ -1,0 +1,22 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  username: postgres
+  password: 123
+  host: localhost
+  port: 5432
+
+development:
+  <<: *default
+  database: siem_api_development
+
+test:
+  <<: *default
+  database: siem_api_test
+
+production:
+  <<: *default
+  database: siem_api_production
+  username: siem_api
+  password: <%= ENV["SIEM_API_DATABASE_PASSWORD"] %>
