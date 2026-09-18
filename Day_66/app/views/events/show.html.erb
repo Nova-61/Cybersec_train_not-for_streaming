@@ -1,0 +1,16 @@
+<h1>Событие #<%= @event.id %></h1>
+
+<p><strong>Уровень:</strong> <%= @event.level %></p>
+<p><strong>Источник:</strong> <%= @event.source %></p>
+<p><strong>Сообщение:</strong> <%= @event.message %></p>
+<p><strong>Когда:</strong> <%= @event.created_at.strftime("%d.%m.%Y %H:%M") %></p>
+
+<p>
+  <%= link_to "← Ко всем событиям", events_path %>
+  <% if policy(@event).update? %>
+    <%= link_to "Редактировать", edit_event_path(@event) %>
+  <% end %>
+  <% if policy(@event).destroy? %>
+    <%= button_to "Удалить", event_path(@event), method: :delete, data: { turbo_confirm: "Точно удалить?" } %>
+  <% end %>
+</p>
